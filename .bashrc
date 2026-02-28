@@ -9,6 +9,7 @@ source ~/.local/share/omarchy/default/bash/rc
 #
 # Make an alias for invoking commands you use constantly
 # alias p='python'
+alias ls='eza -lh --group-directories-first --icons=auto'
 alias l='ls'
 alias lsdls='ls *.vhd'
 alias fds='clear && fastfetch'
@@ -25,4 +26,6 @@ export QSYS_ROOTDIR="/home/migur/intelFPGA_lite/20.1/quartus/sopc_builder/bin"
 #   tmux attach-session -t default || tmux new-session -s default
 # fi
 
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
+#[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
+
+export PATH="$PATH:/home/migur/.local/bin"

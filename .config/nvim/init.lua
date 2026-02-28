@@ -129,6 +129,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-tree/nvim-tree.lua"},
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim"},
 	{ src = "https://github.com/mfussenegger/nvim-jdtls"},
+	{ src = "https://github.com/blazkowolf/gruber-darker.nvim" },
+	{ src = "https://github.com/tahayvr/matteblack.nvim" },
 })
 
 require("ibl")
@@ -243,7 +245,7 @@ vim.keymap.set('n', '<leader>f', ":Pick files<CR>")
 vim.keymap.set('n', '<leader>h', ":Pick help<CR>")
 
 vim.o.background = "dark"
-vim.cmd("colorscheme vague")
+vim.cmd("colorscheme matteblack")
 vim.cmd(":hi statusline guibg=NONE")
 
 -- ============================================================================
