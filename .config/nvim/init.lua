@@ -97,10 +97,10 @@ vim.keymap.set("n", "<S-h>", ":bprevious<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
 
 -- Better window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to top window" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+vim.keymap.set({"n", "t"}, "<C-h>", "<C-w>h", { desc = "Move to left window" })
+vim.keymap.set({"n", "t"}, "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
+vim.keymap.set({"n", "t"}, "<C-k>", "<C-w>k", { desc = "Move to top window" })
+vim.keymap.set({"n", "t"}, "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
 -- Splitting && Resizing
 vim.keymap.set('n', '<leader>|', ':vsplit<CR>')
@@ -114,6 +114,8 @@ vim.keymap.set("n", "<C-Right>", ":vertical resize -2<CR>", { desc = "Increase w
 vim.keymap.set("n", "<leader>ce", ":e $MYVIMRC<CR>", { desc = "Edit config" })
 vim.keymap.set("n", "<leader>cr", ":so $MYVIMRC<CR>", { desc = "Reload config" })
 
+vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>")
+
 vim.pack.add({
 	{ src = "https://github.com/metalelf0/black-metal-theme-neovim" },
 	{ src = "https://github.com/vague-theme/vague.nvim" },
@@ -126,16 +128,20 @@ vim.pack.add({
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/loctvl842/monokai-pro.nvim"},
-	{ src = "https://github.com/nvim-tree/nvim-tree.lua"},
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim"},
 	{ src = "https://github.com/mfussenegger/nvim-jdtls"},
 	{ src = "https://github.com/blazkowolf/gruber-darker.nvim" },
 	{ src = "https://github.com/tahayvr/matteblack.nvim" },
+	{ src = "https://github.com/nvim-neo-tree/neo-tree.nvim"},
+	{
+		src = 'https://github.com/nvim-neo-tree/neo-tree.nvim',
+		version = vim.version.range('3')
+	},
+	"https://github.com/nvim-lua/plenary.nvim",
+	"https://github.com/MunifTanjim/nui.nvim",
 })
 
 require("ibl")
-
-require("nvim-tree").setup()
 
 require('nvim-treesitter').install({ 'hyprlang' }):wait(300000) -- wait max. 5 minutes
 
@@ -214,6 +220,12 @@ require('blink.cmp').setup({
 
 		['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
 	},
+	fuzzy = {
+		implementation = "prefer_rust",
+		prebuilt_binaries = {
+			force_version = '*',
+		},
+	},
 	completion = {
 		list = {
 			selection = {
@@ -244,8 +256,9 @@ vim.keymap.set('i', '<C-o>', "<Esc>o")
 vim.keymap.set('n', '<leader>f', ":Pick files<CR>")
 vim.keymap.set('n', '<leader>h', ":Pick help<CR>")
 
+
 vim.o.background = "dark"
-vim.cmd("colorscheme matteblack")
+vim.cmd("colorscheme gruber-darker")
 vim.cmd(":hi statusline guibg=NONE")
 
 -- ============================================================================
@@ -312,16 +325,6 @@ vim.api.nvim_create_autocmd("TermClose", {
 		if vim.v.event.status == 0 then
 			vim.api.nvim_buf_delete(0, {})
 		end
-	end,
-})
-
--- Disable line numbers in terminal
-vim.api.nvim_create_autocmd("TermOpen", {
-	group = augroup,
-	callback = function()
-		vim.opt_local.number = false
-		vim.opt_local.relativenumber = false
-		vim.opt_local.signcolumn = "no"
 	end,
 })
 
