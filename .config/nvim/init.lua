@@ -2,7 +2,7 @@
 vim.opt.number = true         -- Line numbers
 vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.cursorline = true     -- Highlight current line
-vim.opt.wrap = false          -- Don't wrap lines
+vim.opt.wrap = true          -- Don't wrap lines
 vim.opt.scrolloff = 10        -- Keep 10 lines above/below cursor
 vim.opt.sidescrolloff = 8     -- Keep 8 columns left/right of cursor
 
@@ -23,7 +23,7 @@ vim.opt.incsearch = true  -- Show matches as you type
 -- Visual settings
 vim.opt.termguicolors = true                      -- Enable 24-bit colors
 vim.opt.signcolumn = "yes"                        -- Always show sign column
-vim.opt.colorcolumn = "100"                       -- Show column at 100 characters
+-- vim.opt.colorcolumn = "100"                       -- Show column at 100 characters
 vim.opt.showmatch = true                          -- Highlight matching brackets
 vim.opt.matchtime = 2                             -- How long to show matching bracket
 vim.opt.cmdheight = 1                             -- Command line height
@@ -117,33 +117,71 @@ vim.keymap.set("n", "<leader>cr", ":so $MYVIMRC<CR>", { desc = "Reload config" }
 vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>")
 
 vim.pack.add({
+	-- Themes
 	{ src = "https://github.com/metalelf0/black-metal-theme-neovim" },
 	{ src = "https://github.com/vague-theme/vague.nvim" },
-	{ src = "https://github.com/echasnovski/mini.pick" },
+	{ src = "https://github.com/blazkowolf/gruber-darker.nvim" },
+	{ src = "https://github.com/loctvl842/monokai-pro.nvim"},
+	{ src = "https://github.com/tahayvr/matteblack.nvim" },
+	-- Lsp
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	-- Utils
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/echasnovski/mini.pick" },
 	{ src = "https://github.com/Saghen/blink.cmp" },
 	{ src = "https://github.com/m4xshen/autoclose.nvim" },
 	{ src = "https://github.com/akinsho/bufferline.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-	{ src = "https://github.com/L3MON4D3/LuaSnip" },
-	{ src = "https://github.com/loctvl842/monokai-pro.nvim"},
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim"},
-	{ src = "https://github.com/mfussenegger/nvim-jdtls"},
-	{ src = "https://github.com/blazkowolf/gruber-darker.nvim" },
-	{ src = "https://github.com/tahayvr/matteblack.nvim" },
 	{ src = "https://github.com/nvim-neo-tree/neo-tree.nvim"},
+	{ src = "https://github.com/nvim-lua/plenary.nvim"};
+	{ src = "https://github.com/MunifTanjim/nui.nvim"},
+	{ src = "https://github.com/kylechui/nvim-surround"},
+	{ src = "https://github.com/ej-shafran/compile-mode.nvim"},
 	{
-		src = 'https://github.com/nvim-neo-tree/neo-tree.nvim',
-		version = vim.version.range('3')
+		src = 'https://github.com/JavaHello/spring-boot.nvim',
+		version = '218c0c26c14d99feca778e4d13f5ec3e8b1b60f0',
 	},
-	"https://github.com/nvim-lua/plenary.nvim",
-	"https://github.com/MunifTanjim/nui.nvim",
+	{ src = 'https://github.com/MunifTanjim/nui.nvim'},
+	{ src = 'https://github.com/mfussenegger/nvim-dap'},
+	{ src = 'https://github.com/nvim-java/nvim-java'},
+	-- { src = "https://github.com/max397574/startup.nvim"},
+	{ src = "https://github.com/nvim-telescope/telescope.nvim"},
+	{ src = "https://github.com/arsham/arshamiser.nvim" },
+	{ src = "https://github.com/arsham/arshlib.nvim"},
+	{ src = "https://github.com/famiu/feline.nvim"},
+	{ src = "https://github.com/rebelot/heirline.nvim"},
+	{ src = "https://github.com/kyazdani42/nvim-web-devicons"},
+	{ src = "https://github.com/lewis6991/gitsigns.nvim"},
+	{ src = "https://github.com/nvim-mini/mini.base16"}
 })
 
-require("ibl")
+-- require("arshamiser.feliniser")
 
-require('nvim-treesitter').install({ 'hyprlang' }):wait(300000) -- wait max. 5 minutes
+-- require("startup").setup()
+
+-- require"startup".create_mappings({
+--   ["ff"]="<cmd>Telescope find_files<CR>",
+--   ["fg"]="<cmd>Telescope live_grep<CR>",
+-- })
+
+vim.g.compile_mode = {
+	default_command = {
+		c = "make -k",
+	},
+	recompile_no_fail = true,
+}
+
+vim.keymap.set("n", "<leader>R", ":below Compile<CR>")
+vim.keymap.set("n", "<leader>r", ":below Recompile<CR>")
+
+require("ibl").setup()
+
+require("nvim-surround").setup({
+})
+
+-- require('nvim-treesitter').install({ 'hyprlang' }):wait(300000) -- wait max. 5 minutes
 
 vim.filetype.add({
   pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
@@ -236,6 +274,7 @@ require('blink.cmp').setup({
 	}
 })
 
+require('java').setup()
 vim.lsp.enable({ "lua_ls", "clangd", "jdtls" })
 vim.lsp.config("lua_ls", {
 	settings = {
@@ -258,8 +297,7 @@ vim.keymap.set('n', '<leader>h', ":Pick help<CR>")
 
 
 vim.o.background = "dark"
-vim.cmd("colorscheme gruber-darker")
-vim.cmd(":hi statusline guibg=NONE")
+-- vim.cmd(":hi statusline guibg=NONE")
 
 -- ============================================================================
 -- USEFUL FUNCTIONS
@@ -333,8 +371,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 	group = augroup,
 	callback = function()
 		vim.cmd("tabdo wincmd =")
-	end,
-})
+	end, })
 
 -- Create directories when saving files
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -365,123 +402,65 @@ if vim.fn.isdirectory(undodir) == 0 then
 	vim.fn.mkdir(undodir, "p")
 end
 
--- ============================================================================
--- STATUSLINE
--- ============================================================================
 
--- Git branch function
-local function git_branch()
-	local branch = vim.fn.system("git branch --show-current 2>/dev/null | tr -d '\n'")
-	if branch ~= "" then
-		return "  " .. branch .. " "
-	end
-	return ""
-end
+  -- Define the path to your Matugen output
+  local matugen_path = os.getenv("HOME") .. "/.config/matugen/generated/neovim-colors.lua"
 
--- File type with icon
-local function file_type()
-	local ft = vim.bo.filetype
-	local icons = {
-		lua = "[LUA]",
-		python = "[PY]",
-		javascript = "[JS]",
-		html = "[HTML]",
-		css = "[CSS]",
-		json = "[JSON]",
-		markdown = "[MD]",
-		vim = "[VIM]",
-		sh = "[SH]",
-		c = "[C]",
-		hyprlang = "[HYPR]",
-	}
+  -- SAFEGUARD: A default palette to prevent crashes if Matugen hasn't run yet.
+  -- This ensures vim.g.base16_guiXX globals exist for Lualine/Noice.
+  local default_colors = {
+	base00 = "#1e1e2e", base01 = "#181825", base02 = "#313244", base03 = "#45475a",
+	base04 = "#585b70", base05 = "#cdd6f4", base06 = "#f5e0dc", base07 = "#b4befe",
+	base08 = "#f38ba8", base09 = "#fab387", base0A = "#f9e2af", base0B = "#a6e3a1",
+	base0C = "#94e2d5", base0D = "#89b4fa", base0E = "#cba6f7", base0F = "#f2cdcd"
+  }
 
-	if ft == "" then
-		return "  "
-	end
-
-	return (icons[ft] or ft)
-end
-
--- Word count for text files
-local function word_count()
-	local ft = vim.bo.filetype
-	if ft == "markdown" or ft == "text" or ft == "tex" then
-		local words = vim.fn.wordcount().words
-		return "  " .. words .. " words "
-	end
-	return ""
-end
-
--- File size
-local function file_size()
-	local size = vim.fn.getfsize(vim.fn.expand('%'))
-	if size < 0 then return "" end
-	if size < 1024 then
-		return size .. "B "
-	elseif size < 1024 * 1024 then
-		return string.format("%.1fK", size / 1024)
+  -- Function to safely source the theme
+  local function load_theme()
+	-- OPTIMIZATION: Use libuv (fast) to check file existence
+	if vim.uv.fs_stat(matugen_path) then
+	  local ok, err = pcall(dofile, matugen_path)
+	  if not ok then
+		vim.notify("Matugen Load Error: " .. err, vim.log.levels.ERROR)
+		-- FIX: Use your wrapper to set globals, not raw mini.base16
+		require("base16-colorscheme").setup(default_colors)
+	  end
 	else
-		return string.format("%.1fM", size / 1024 / 1024)
+	  vim.notify("Matugen colors not found. Using safe defaults.", vim.log.levels.WARN)
+	  -- FIX: Use your wrapper to set globals, ensuring Lualine doesn't crash
+	  require("base16-colorscheme").setup(default_colors)
 	end
-end
+  end
 
--- Mode indicators with icons
-local function mode_icon()
-	local mode = vim.fn.mode()
-	local modes = {
-		n = "NORMAL",
-		i = "INSERT",
-		v = "VISUAL",
-		V = "V-LINE",
-		["\22"] = "V-BLOCK", -- Ctrl-V
-		c = "COMMAND",
-		s = "SELECT",
-		S = "S-LINE",
-		["\19"] = "S-BLOCK", -- Ctrl-S
-		R = "REPLACE",
-		r = "REPLACE",
-		["!"] = "SHELL",
-		t = "TERMINAL"
-	}
-	return modes[mode] or "  " .. mode:upper()
-end
+  -- 1. Load the theme
+  load_theme()
 
-_G.mode_icon = mode_icon
-_G.git_branch = git_branch
-_G.file_type = file_type
-_G.file_size = file_size
+  -- 2. Apply tweaks that must happen AFTER the theme loads
+  local function apply_tweaks()
+	vim.api.nvim_set_hl(0, "Comment", { italic = true })
+	
+	-- UI FIX: Remove background from NvimTree to make it blend with the terminal/transparency
+	vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "NONE", ctermbg = "NONE" })
 
-vim.cmd([[
-  highlight StatusLineBold gui=bold cterm=bold
-]])
+	-- Reset cursor shape (Hyprland optimization)
+	-- vim.opt.guicursor = "n-v-c:hor20-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor"
+  end
+  
+  apply_tweaks()
 
--- Function to change statusline based on window focus
-local function setup_dynamic_statusline()
-	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
-		callback = function()
-			vim.opt_local.statusline = table.concat {
-				"  ",
-				"%#StatusLineBold#",
-				"%{v:lua.mode_icon()}",
-				"%#StatusLine#",
-				" │ %f %h%m%r",
-				"%{v:lua.git_branch()}",
-				" │ ",
-				"%{v:lua.file_type()}",
-				" | ",
-				"%{v:lua.file_size()}",
-				"%=", -- Right-align everything after this
-				"%l:%c  %P ", -- Line:Column and Percentage
-			}
-		end
-	})
-	vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true })
+  -- 3. Live Reloading (Libuv Signal Listener)
+  -- This correctly listens for 'pkill -USR1 nvim' on Arch/Linux
+  local signal = vim.uv.new_signal()
+  signal:start("sigusr1", function()
+	vim.schedule(function()
+	  load_theme()
+	  apply_tweaks()
+	  -- Optional: Refresh lualine if it's loaded to pick up new globals
+	  if package.loaded["lualine"] then
+		require("lualine").refresh()
+	  end
+	  vim.notify("Theme reloaded via SIGUSR1")
+		end)
+  end)
 
-	vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
-		callback = function()
-			vim.opt_local.statusline = "  %f %h%m%r │ %{v:lua.file_type()} | %=  %l:%c   %P "
-		end
-	})
-end
-
-setup_dynamic_statusline()
+vim.cmd("colorscheme vague")

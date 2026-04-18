@@ -38,4 +38,4 @@ local function toggle_terminal()
 end
 
 -- Keybinding: Press Ctrl + \ to toggle (similar to many IDEs)
-vim.keymap.set({'n', 't'}, '<C-\\>', toggle_terminal, { desc = "Toggle Bottom Terminal" })
+vim.keymap.set({'n', 't'}, "<leader>t", toggle_terminal, { desc = "Toggle Bottom Terminal" })
