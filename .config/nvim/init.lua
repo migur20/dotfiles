@@ -168,7 +168,7 @@ vim.pack.add({
 
 vim.g.compile_mode = {
 	default_command = {
-		c = "make -k",
+		c = "make -k && build/main",
 	},
 	recompile_no_fail = true,
 }
