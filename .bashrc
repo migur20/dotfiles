@@ -16,8 +16,6 @@ alias clr='clear && ls'
 alias vim='nvim'
 alias ..='cd ..'
 
-# alias cheat='~/.config/hypr/scripts/cheat.sh' ???????????
-
 export QSYS_ROOTDIR="/home/migur/intelFPGA_lite/20.1/quartus/sopc_builder/bin"
 
 PS1='$(git branch 2> /dev/null | grep "*" | sed "s/* //")'
@@ -26,6 +24,8 @@ PS1="\e[34m$PS1\e[39m"
 PS1="\w $PS1\n❯ "
 
 export PATH="$PATH:/home/migur/.local/bin"
+export PATH="$PATH:/bin"
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
 
 export CC="gcc"
 
