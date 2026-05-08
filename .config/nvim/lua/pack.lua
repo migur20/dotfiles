@@ -42,7 +42,7 @@ require("plugins.ibl")
 
 require("plugins.surround")
 
-require("plugins.autoclose")
+--require("plugins.autoclose")
 
 require("plugins.monokai-pro")
 
