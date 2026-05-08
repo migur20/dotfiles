@@ -98,3 +98,9 @@ vim.opt.diffopt:append("linematch:60")
 -- Performance improvements
 vim.opt.redrawtime = 10000
 vim.opt.maxmempattern = 20000
+vim.lsp.buf.format({
+  filter = function(client) return client.name == "clangd" end, -- use only clangd
+  async = false,       -- true = non-blocking (can cause issues on save)
+  timeout_ms = 2000,   -- ms to wait for response (sync only)
+  range = nil,         -- nil = whole file; or { start, ["end"] } for selection
+})
