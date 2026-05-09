@@ -20,11 +20,6 @@ alias cdi='zi'
 
 export QSYS_ROOTDIR="/home/migur/intelFPGA_lite/20.1/quartus/sopc_builder/bin"
 
-PS1='$(git branch 2> /dev/null | grep "*" | sed "s/* //")'
-# 34 -> Blue
-PS1="\e[34m$PS1\e[39m"
-PS1="\w $PS1\n❯ "
-
 export PATH="$PATH:/home/migur/.local/bin"
 export PATH="$PATH:/bin"
 export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin/"
@@ -37,7 +32,7 @@ HYPRCONF=~/.config/hypr/edit_here/source/
 export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 1)
 export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
-export LESS_TERMCAP_mjogandofoddacie=$(tput sgr0)
+export LESS_TERMCAP_me=$(tput sgr0)
 export LESS_TERMCAP_se=$(tput sgr0)
 export LESS_TERMCAP_ue=$(tput sgr0)
 export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 2)
@@ -50,3 +45,7 @@ export LESS_TERMCAP_ZW=$(tput rsupm)
 export MANPAGER='less'
 
 eval "$(zoxide init bash)"
+
+eval "$(starship init bash)"
+
+eval "$(tmux attach -t 0)"
