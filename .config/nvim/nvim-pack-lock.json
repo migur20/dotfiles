@@ -60,6 +60,10 @@
       "rev": "800f107b27a00978b0dadd672d6da21a5b12fa9a",
       "src": "https://github.com/nvim-mini/mini.base16"
     },
+    "mini.nvim": {
+      "rev": "264b5c8fc6e82212af0dc5c345145cfa916efeb6",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
     "mini.pick": {
       "rev": "aa242acc17683515d8f749552aebe061bced9132",
       "src": "https://github.com/echasnovski/mini.pick"
@@ -152,6 +156,10 @@
     "vague.nvim": {
       "rev": "fcc283576764474ccfbbcca240797d5d7f4d8a78",
       "src": "https://github.com/vague2k/vague.nvim"
+    },
+    "vim-moonfly-colors": {
+      "rev": "4ed07bc0c6083cdd547c63f5c245e02c068b0c45",
+      "src": "https://github.com/bluz71/vim-moonfly-colors"
     },
     "vim-startify": {
       "rev": "4e089dffdad46f3f5593f34362d530e8fe823dcf",
