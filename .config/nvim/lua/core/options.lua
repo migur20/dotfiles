@@ -1,3 +1,5 @@
+vim.g.netrw_banner = 0
+
 -- Basic settings
 vim.opt.number = true         -- Line numbers
 vim.opt.relativenumber = true -- Relative line numbers
