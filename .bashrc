@@ -49,22 +49,24 @@ eval "$(zoxide init bash)"
 eval "$(starship init bash)"
 
 # ----------------------- TMUX ---------------------------------
-# Don't do anything if we're already inside tmux
-if [[ -n "$TMUX" ]]; then
-  exit 0
-fi
+tmux-session() {
+	# Don't do anything if we're already inside tmux
+	if [[ -n "$TMUX" ]]; then
+		exit 0
+	fi
 
-main_session="main"
+	main_session="main"
 
-tmux has-session -t="$main_session" 2>/dev/null
+	tmux has-session -t="$main_session" 2>/dev/null
 
-if [[ $? -ne 0 ]]; then
-  # First terminal — create and attach to main
-  exec tmux new-session -s "$main_session"
-else
-  # Main exists — spin up a unique session and attach
-  new_session="sesh-$$"
-  tmux new-session -d -s "$new_session"
-  exec tmux attach -t "$new_session"
-fi
+	if [[ $? -ne 0 ]]; then
+		# First terminal — create and attach to main
+		exec tmux new-session -s "$main_session"
+	else
+		# Main exists — spin up a unique session and attach
+		new_session="sesh-$$"
+		tmux new-session -d -s "$new_session"
+		exec tmux attach -t "$new_session"
+	fi
+}
 # -------------------------------------------------------------

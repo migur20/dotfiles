@@ -50,7 +50,7 @@ require("plugins.bufferline")
 
 require("plugins.blink")
 
-require("plugins.java")
+require("plugins.lsp")
 
 -- mini files ----
 local MiniFiles = require("mini.files")
@@ -64,11 +64,15 @@ MiniFiles.setup({
     },
 })
 
-vim.keymap.set("n", "-", "<cmd>lua MiniFiles.open()<CR>", { desc = "Toggle mini file explorer" })
-vim.keymap.set("n", "<leader>e", function()
-    MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-    MiniFiles.reveal_cwd()
-end, { desc = "Toggle into currently opened file" })
+vim.keymap.set("n", "<leader>e", "<cmd>lua MiniFiles.open()<CR>", { desc = "Toggle mini file explorer" })
+-- vim.keymap.set("n", "-", function()
+-- 	local state = MiniFiles.get_explorer_state()
+-- end , { desc = "Toggle mini file explorer" })
+
+-- vim.keymap.set("n", "<leader>e", function()
+--     MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+--     MiniFiles.reveal_cwd()
+-- end, { desc = "Toggle into currently opened file" })
 
 ---- mini notify ----
 require("mini.notify").setup({
@@ -81,9 +85,9 @@ require("mini.notify").setup({
 })
 
 --- mini cmdline completion ---
-require("mini.cmdline").setup({
-    autocorrect = { enable = false }
-})
+-- require("mini.cmdline").setup({
+--     autocorrect = { enable = false }
+-- })
 
 --- mini surround ---
 require("mini.surround").setup()
